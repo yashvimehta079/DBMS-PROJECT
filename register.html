@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | Hotel Management</title>
+    <link rel="stylesheet" href="form.css" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h2 class="logo">Marriott</h2>
+            <div class="nav-links">
+                <a href="login.html">Login</a>
+                <a href="register.html" class="active">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <div class="glass-card">
+            <h2>Create Account</h2>
+            <p class="subtitle">Join our hotel family</p>
+            <form id="registerForm">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" placeholder="Enter your name" required />
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" required />
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password" required />
+                </div>
+                <div class="input-group">
+                    <label>User Type</label>
+                    <select required>
+                        <option value="">Select Role</option>
+                        <option>Admin</option>
+                        <option>Staff</option>
+                        <option>Guest</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Register</button>
+                <p class="redirect-text">
+                    Already have an account? <a href="login.html">Login</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="register.js"></script>
+</body>
+
+</html>

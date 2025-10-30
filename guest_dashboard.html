@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Marriott — Guest Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="guest_dashboard.css" />
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">Marriott</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+                <i class="fa fa-bars" style="color:#fff"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navCollapse">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bookings">Bookings</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#payments">Payments</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="/logout" class="btn btn-outline-light btn-sm px-3">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- HERO SLIDER -->
+    <header class="hero-section">
+        <div class="hero-slide active" style="background-image:url('image 23.png')"></div>
+        <div class="hero-slide" style="background-image:url('image 3.jpg')"></div>
+        <div class="hero-slide" style="background-image:url('image 4.jpg')"></div>
+        <div class="hero-slide" style="background-image:url('image 5.jpg')"></div>
+
+        <div class="hero-overlay"></div>
+        <div class="hero-content text-center">
+            <h1>Welcome, Guest</h1>
+            <p class="lead">Luxury stays. Memorable moments.</p>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mt-5 pt-4">
+
+        <!-- OVERVIEW -->
+        <section id="overview" class="my-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="glass-card text-center p-4">
+                        <i class="fa-solid fa-bed fa-2x mb-2 text-gold"></i>
+                        <h5>Total Bookings</h5>
+                        <h2 id="total-bookings">—</h2>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card text-center p-4">
+                        <i class="fa-solid fa-credit-card fa-2x mb-2 text-gold"></i>
+                        <h5>Total Spent</h5>
+                        <h2 id="total-spent">—</h2>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="glass-card text-center p-4">
+                        <i class="fa-solid fa-star fa-2x mb-2 text-gold"></i>
+                        <h5>Average Rating</h5>
+                        <h2 id="avg-rating">—</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BOOKINGS -->
+        <section id="bookings" class="my-5">
+            <h3 class="section-title"><i class="fa-solid fa-calendar-check me-2 text-gold"></i>My Bookings</h3>
+            <div class="table-responsive glass-table">
+                <table class="table table-hover align-middle mb-0">
+                    <thead>
+                        <tr>
+                            <th>Booking ID</th>
+                            <th>Room</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="booking-table-body">
+                        <!-- Data will be fetched dynamically -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PAYMENTS -->
+        <section id="payments" class="my-5">
+            <h3 class="section-title"><i class="fa-solid fa-money-bill-wave me-2 text-gold"></i>Payment Insights</h3>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <canvas id="spendingChart" height="180"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <canvas id="bookingChart" height="180"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REVIEWS -->
+        <section id="reviews" class="my-5">
+            <h3 class="section-title"><i class="fa-solid fa-comment-dots me-2 text-gold"></i>Share Your Experience</h3>
+            <div class="glass-card p-4">
+                <form id="reviewForm">
+                    <div class="mb-3">
+                        <label class="form-label">Select Booking</label>
+                        <select class="form-select" id="review-booking-select">
+                            <!-- Populated dynamically -->
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Rating</label>
+                        <select class="form-select" id="review-rating">
+                            <option value="">Select</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Comments</label>
+                        <textarea class="form-control" rows="3" id="review-comments"
+                            placeholder="Your feedback..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-gold">Submit Review</button>
+                </form>
+            </div>
+        </section>
+
+        <!-- PROFILE (INLINE EDITABLE) -->
+        <section id="profile" class="my-5 text-center">
+            <h3 class="section-title"><i class="fa-solid fa-user-circle me-2 text-gold"></i>My Profile</h3>
+            <div class="glass-card p-4">
+                <img src="https://i.ibb.co/yW1zBPj/user.png" class="rounded-circle mb-3" width="120" height="120"
+                    alt="User" />
+                <div id="view-mode">
+                    <h4 id="profile-name">Guest User</h4>
+                    <p><i class="fa-solid fa-envelope me-2"></i><span id="profile-email">guest@example.com</span></p>
+                    <p><i class="fa-solid fa-phone me-2"></i><span id="profile-phone">+91 98765 43210</span></p>
+                    <button id="edit-btn" class="btn btn-gold mt-2"><i class="fa-solid fa-pen me-2"></i>Edit
+                        Profile</button>
+                </div>
+
+                <div id="edit-mode" class="d-none">
+                    <input type="text" id="edit-name" class="form-control mb-2" placeholder="Enter your full name" />
+                    <input type="email" id="edit-email" class="form-control mb-2"
+                        placeholder="Enter your email address" />
+                    <input type="text" id="edit-phone" class="form-control mb-3"
+                        placeholder="Enter your phone number" />
+                    <button id="save-btn" class="btn btn-gold me-2"><i class="fa-solid fa-save me-1"></i>Save</button>
+                    <button id="cancel-btn" class="btn btn-outline-light"><i
+                            class="fa-solid fa-xmark me-1"></i>Cancel</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-3 mt-5">
+        <p>&copy; 2025 Marriott Hotel | Designed for Comfort & Luxury</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="guest_dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+    color: #fff;
+    overflow-x: hidden;
+    padding-top: 100px;
+    /* Prevents navbar overlap */
+}
+
+/* Navbar */
+.navbar {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    z-index: 10;
+}
+
+.nav-container {
+    width: 90%;
+    max-width: 1100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.8rem;
+    background: linear-gradient(45deg, #d4af37, #f5e6a1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #bbb;
+    margin-left: 1.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #f5e6a1;
+    text-shadow: 0 0 8px #f5e6a1;
+}
+
+/* Form Section */
+.form-container {
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle at top left, #2b2b2b, #000);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 2.5rem;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 0 30px rgba(212, 175, 55, 0.25);
+    animation: fadeIn 1s ease;
+}
+
+.glass-card h2 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    color: #f5e6a1;
+    text-align: center;
+}
+
+.subtitle {
+    text-align: center;
+    color: #ccc;
+    margin-bottom: 1.8rem;
+}
+
+.input-group {
+    margin-bottom: 1.3rem;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin-bottom: 0.3rem;
+}
+
+input,
+select {
+    padding: 0.8rem;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    outline: none;
+    transition: 0.3s ease;
+}
+
+input::placeholder {
+    color: #aaa;
+}
+
+input:focus,
+select:focus {
+    border-color: #d4af37;
+    box-shadow: 0 0 8px #d4af37;
+}
+
+/* Dropdown */
+select option {
+    background: #1e1e1e;
+    color: #fff;
+}
+
+/* Button */
+.btn {
+    width: 100%;
+    padding: 0.9rem;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(45deg, #d4af37, #f5e6a1);
+    color: #000;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.4s ease;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #d4af37;
+}
+
+/* Redirect Text */
+.redirect-text {
+    text-align: center;
+    margin-top: 1.3rem;
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.redirect-text a {
+    color: #f5e6a1;
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+.redirect-text a:hover {
+    text-shadow: 0 0 10px #f5e6a1;
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Toast Notification */
+.toast {
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    background: rgba(212, 175, 55, 0.95);
+    color: #000;
+    padding: 0.9rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+    z-index: 9999;
+    opacity: 0;
+    transition: all 0.5s ease;
+}
+
+.toast.error {
+    background: rgba(255, 60, 60, 0.9);
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255, 60, 60, 0.5);
+}
+
+.toast.show {
+    right: 20px;
+    opacity: 1;
+}

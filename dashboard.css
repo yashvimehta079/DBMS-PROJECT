@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --gold: #d4af37;
+    --gold-light: #f5e6a1;
+    --dark-bg: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+    --glass: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.15);
+    --text-light: #eee;
+    --text-muted: #bbb;
+}
+
+/* ---------------- GLOBAL ---------------- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    background: var(--dark-bg);
+    color: var(--text-light);
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* ---------------- NAVBAR ---------------- */
+.navbar {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+    padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.navbar .text-muted {
+    color: var(--text-muted) !important;
+}
+
+.navbar .btn-outline-dark {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.navbar .btn-outline-dark:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+/* ---------------- SIDEBAR ---------------- */
+.sidebar {
+    background: rgba(30, 30, 30, 0.6);
+    border-right: 1px solid var(--border);
+    backdrop-filter: blur(10px);
+    min-height: 90vh;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+}
+
+.sidebar .card {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    box-shadow: none;
+}
+
+.nav-pills .nav-link {
+    color: var(--text-light);
+    border-radius: 10px;
+    margin-bottom: 0.3rem;
+    transition: all 0.3s ease;
+}
+
+.nav-pills .nav-link.active {
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    color: #000;
+    font-weight: 600;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+.nav-pills .nav-link:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--gold-light);
+}
+
+/* ---------------- MAIN CONTENT ---------------- */
+.dashboard-container {
+    padding: 1rem 1.5rem;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
+    color: var(--text-light);
+}
+
+/* ---------------- STATS ---------------- */
+.stat-card {
+    border-radius: 15px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(212, 175, 55, 0.3);
+}
+
+.stat-card h6 {
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.stat-card h3 {
+    color: var(--gold-light);
+}
+
+.text-gold {
+    color: var(--gold-light);
+}
+
+/* ---------------- TABLES ---------------- */
+.table {
+    color: var(--text-light);
+    border-collapse: collapse;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.table thead {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--gold-light);
+    text-transform: uppercase;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.table td,
+.table th {
+    border: none;
+}
+
+/* ---------------- BUTTONS ---------------- */
+.btn {
+    border-radius: 8px;
+    font-weight: 500;
+}
+
+.btn-outline-secondary {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background: var(--gold);
+    color: #000;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    border: none;
+    color: #000;
+    font-weight: 600;
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 20px var(--gold);
+}
+
+/* ---------------- MODALS ---------------- */
+.modal-content {
+    background: rgba(30, 30, 30, 0.95);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+    backdrop-filter: blur(15px);
+}
+
+.modal-header {
+    border-bottom: 1px solid var(--border);
+}
+
+.form-select,
+input,
+select {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid var(--border);
+}
+
+.form-select:focus,
+input:focus,
+select:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+    outline: none;
+}
+
+/* ---------------- CHARTS ---------------- */
+canvas {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 0.5rem;
+}
+
+/* ---------------- RESPONSIVE ---------------- */
+@media (max-width: 767px) {
+    .sidebar {
+        display: none;
+    }
+}

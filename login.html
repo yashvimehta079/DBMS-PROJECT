@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Hotel Management</title>
+    <link rel="stylesheet" href="form.css" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h2 class="logo">Marriott</h2>
+            <div class="nav-links">
+                <a href="login.html" class="active">Login</a>
+                <a href="register.html">Register</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="form-container">
+        <div class="glass-card">
+            <h2>Welcome Back</h2>
+            <p class="subtitle">Sign in to your account</p>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="Enter your email" required />
+                </div>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="Enter password" required />
+                </div>
+                <div class="input-group">
+                    <label>User Type</label>
+                    <select required>
+                        <option value="">Select Role</option>
+                        <option>Admin</option>
+                        <option>Staff</option>
+                        <option>Guest</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Login</button>
+                <p class="redirect-text">
+                    Don’t have an account? <a href="register.html">Register</a>
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script src="login.js"></script>
+</body>
+
+</html>
