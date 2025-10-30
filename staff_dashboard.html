@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marriott — Staff Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="staff_dashboard.css" />
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">Marriott</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+                <i class="fa fa-bars" style="color:#fff"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navCollapse">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#overview">Overview</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tasks">Tasks</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#guests">Guests</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#charts">Charts</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#profile">Profile</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <!-- non-functional placeholder; replace href with /logout when backend added -->
+                        <a href="#" onclick="alert('Logout will be wired to backend later.')"
+                            class="btn btn-outline-light btn-sm px-3">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container mt-5 pt-4 pb-5">
+        <!-- OVERVIEW -->
+        <section id="overview" class="my-4">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <div class="glass-card text-center p-4">
+                        <i class="fa-solid fa-tasks fa-2x mb-2 text-gold"></i>
+                        <h6 class="muted small">Assigned Tasks</h6>
+                        <h2 id="stat-tasks">—</h2>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card text-center p-4">
+                        <i class="fa-solid fa-comments fa-2x mb-2 text-gold"></i>
+                        <h6 class="muted small">Pending Queries</h6>
+                        <h2 id="stat-queries">—</h2>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card text-center p-4">
+                        <i class="fa-solid fa-user-check fa-2x mb-2 text-gold"></i>
+                        <h6 class="muted small">Guests Assisted</h6>
+                        <h2 id="stat-guests">—</h2>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="glass-card text-center p-4">
+                        <i class="fa-solid fa-check-circle fa-2x mb-2 text-gold"></i>
+                        <h6 class="muted small">Completed Today</h6>
+                        <h2 id="stat-completed">—</h2>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASKS -->
+        <section id="tasks" class="my-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="section-title"><i class="fa-solid fa-list-check me-2 text-gold"></i>Assigned Tasks</h5>
+                <div>
+                    <button id="refresh-tasks" class="btn btn-sm btn-outline-secondary"><i
+                            class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+                </div>
+            </div>
+
+            <div class="table-responsive glass-table mb-3">
+                <table class="table table-hover align-middle" id="tbl-tasks">
+                    <thead>
+                        <tr>
+                            <th>Task ID</th>
+                            <th>Assigned To</th>
+                            <th>Description</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Due</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody><!-- populated by JS --></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- GUESTS -->
+        <section id="guests" class="my-4">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="section-title"><i class="fa-solid fa-users me-2 text-gold"></i>Guest Management</h5>
+                <div>
+                    <button id="refresh-guests" class="btn btn-sm btn-outline-secondary"><i
+                            class="fa-solid fa-arrows-rotate"></i> Refresh</button>
+                </div>
+            </div>
+
+            <div class="table-responsive glass-table mb-3">
+                <table class="table table-hover align-middle" id="tbl-guests">
+                    <thead>
+                        <tr>
+                            <th>Guest</th>
+                            <th>Room</th>
+                            <th>Check-In</th>
+                            <th>Check-Out</th>
+                            <th>Phone</th>
+                            <th>Notes</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody><!-- populated by JS --></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CHARTS -->
+        <section id="charts" class="my-4">
+            <h5 class="section-title mb-3"><i class="fa-solid fa-chart-pie me-2 text-gold"></i>Operations Overview</h5>
+            <div class="row g-3">
+                <div class="col-lg-6">
+                    <div class="chart-container p-3">
+                        <h6 class="mb-2">Task Completion Status</h6>
+                        <canvas id="staffPieChart" height="220"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="chart-container p-3">
+                        <h6 class="mb-2">Daily Operations Trend</h6>
+                        <canvas id="staffLineChart" height="220"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PROFILE -->
+        <section id="profile" class="my-5 text-center">
+            <h3 class="section-title">
+                <i class="fa-solid fa-user-tie me-2 text-gold"></i>My Profile
+            </h3>
+            <div class="glass-card p-4">
+                <img src="https://i.ibb.co/yW1zBPj/user.png" class="rounded-circle mb-3" width="120" height="120" />
+
+                <!-- View Mode -->
+                <div id="staff-view-mode">
+                    <h4 id="staff-name">Staff Member</h4>
+                    <p><i class="fa-solid fa-envelope me-2"></i><span id="staff-email">staff@example.com</span></p>
+                    <p><i class="fa-solid fa-phone me-2"></i><span id="staff-phone">+91 99999 88888</span></p>
+                    <button id="staff-edit-btn" class="btn btn-gold mt-2">
+                        <i class="fa-solid fa-pen me-2"></i>Edit Profile
+                    </button>
+                </div>
+
+                <!-- Edit Mode -->
+                <div id="staff-edit-mode" class="d-none">
+                    <input type="text" id="edit-staff-name" class="form-control mb-2" placeholder="Enter name" />
+                    <input type="email" id="edit-staff-email" class="form-control mb-2" placeholder="Enter email" />
+                    <input type="text" id="edit-staff-phone" class="form-control mb-3"
+                        placeholder="Enter phone number" />
+                    <button id="staff-save-btn" class="btn btn-gold me-2">Save</button>
+                    <button id="staff-cancel-btn" class="btn btn-outline-light">Cancel</button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="text-center py-3">
+        <p>&copy; 2025 Marriott Hotel | Staff Panel</p>
+    </footer>
+
+    <!-- Modal: Update Task Status -->
+    <div class="modal fade" id="modalTaskUpdate" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="form-task-update">
+                    <div class="modal-body">
+                        <input type="hidden" name="task_id" id="modal-task-id" />
+                        <div class="mb-3">
+                            <label class="form-label">Status</label>
+                            <select name="status" id="modal-task-status" class="form-select">
+                                <option value="pending">Pending</option>
+                                <option value="in_progress">In Progress</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Remarks</label>
+                            <textarea name="remarks" id="modal-task-remarks" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="staff_dashboard.js"></script>
+</body>
+
+</html>

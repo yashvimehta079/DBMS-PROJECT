@@ -1,0 +1,228 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --gold: #d4af37;
+    --gold-light: #f5e6a1;
+    --dark-bg: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+    --glass: rgba(255, 255, 255, 0.06);
+    --border: rgba(255, 255, 255, 0.12);
+    --text-light: #eee;
+    --muted: #bdbdbd;
+}
+
+/* global */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif
+}
+
+body {
+    background: var(--dark-bg);
+    color: var(--text-light);
+    padding-top: 90px;
+    min-height: 100vh;
+}
+
+/* navbar */
+.glass-nav {
+    background: rgba(25, 25, 25, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    padding: 0.8rem 1rem;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+
+.nav-link.active,
+.nav-link:hover {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 6px rgba(212, 175, 55, 0.15)
+}
+
+/* cards/glass */
+.glass-card {
+    background: var(--glass);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+.text-gold {
+    color: var(--gold-light)
+}
+
+.muted {
+    color: var(--muted)
+}
+
+/* section title */
+.section-title {
+    color: var(--gold-light);
+    font-weight: 600;
+    letter-spacing: 0.6px;
+}
+
+/* tables */
+.table {
+    background: transparent;
+    color: var(--text-light);
+    border-collapse: collapse;
+}
+
+.table thead th {
+    background: rgba(255, 255, 255, 0.04);
+    color: var(--gold-light);
+    text-transform: uppercase;
+    font-size: 0.8rem;
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03)
+}
+
+/* chart container */
+.chart-container {
+    background: var(--glass);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    padding: 1rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+}
+
+/* buttons */
+.btn-gold {
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    border: none;
+    color: #000;
+    font-weight: 600;
+    border-radius: 8px;
+}
+
+.btn-outline-light {
+    border: 1px solid var(--gold-light);
+    color: var(--gold-light);
+}
+
+.btn-outline-secondary {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.btn-outline-secondary:hover {
+    background: var(--gold);
+    color: #000
+}
+
+/* PROFILE FIXES */
+#profile {
+    color: var(--text-light);
+}
+
+#staff-view-mode h5,
+#staff-view-mode p {
+    color: var(--text-light);
+}
+
+#staff-edit-mode input {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--border);
+    color: var(--text-light);
+    font-size: 1rem;
+}
+
+#staff-edit-mode input::placeholder {
+    color: var(--text-muted);
+}
+
+#staff-edit-btn {
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#staff-edit-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+}
+
+/* Make edit inputs clearly visible */
+#staff-edit-mode .form-control:focus {
+    border-color: var(--gold);
+    box-shadow: 0 0 10px var(--gold);
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Ensure Save/Cancel buttons visible */
+#staff-save-btn,
+#staff-cancel-btn {
+    min-width: 90px;
+}
+
+/* Modal styling still gold-black theme */
+.modal-content {
+    background: rgba(20, 20, 20, 0.96);
+    color: var(--text-light);
+    border: 1px solid var(--border);
+}
+
+/* ---------------- STAFF PROFILE FIXES ---------------- */
+
+/* Ensure text is visible */
+#profile h4,
+#profile p,
+#profile span {
+    color: var(--text-light);
+}
+
+/* Edit inputs look premium */
+#staff-edit-mode input {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--border);
+    color: #fff;
+    font-size: 1rem;
+    border-radius: 10px;
+    padding: 0.7rem;
+}
+
+#staff-edit-mode input::placeholder {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* Button hover effect */
+#staff-edit-btn,
+#staff-save-btn {
+    transition: all 0.3s ease;
+}
+
+#staff-edit-btn:hover,
+#staff-save-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Fade animation for smoother mode switch */
+#staff-view-mode,
+#staff-edit-mode {
+    transition: opacity 0.4s ease;
+}
+
+.d-none {
+    opacity: 0;
+    pointer-events: none;
+}
