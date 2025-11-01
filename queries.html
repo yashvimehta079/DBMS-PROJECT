@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Marriott — User Queries</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="queries.css" />
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">Marriott</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+                <i class="fa fa-bars" style="color:#fff"></i>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navCollapse">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item me-2"><a class="nav-link" href="admin_dashboard.html" target="_blank">Admin</a>
+                    </li>
+                    <li class="nav-item me-2"><a class="nav-link" href="staff_dashboard.html" target="_blank">Staff</a>
+                    </li>
+                    <li class="nav-item me-2"><a class="nav-link" href="guest_dashboard.html" target="_blank">Guest</a>
+                    </li>
+
+                    <!-- notifications -->
+                    <li class="nav-item dropdown me-2">
+                        <a class="nav-link position-relative" href="#" id="notifDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fa-solid fa-bell"></i>
+                            <span id="notifCount" class="badge notif-badge d-none">0</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end notif-dropdown" aria-labelledby="notifDropdown">
+                            <li class="dropdown-header">Recent Pending Queries</li>
+                            <li>
+                                <div id="notifList" class="px-3 py-2 small text-muted">Loading…</div>
+                            </li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#" id="openQueriesAll">Open Queries Page</a></li>
+                        </ul>
+                    </li>
+
+                    <!-- auto-refresh -->
+                    <li class="nav-item d-flex align-items-center me-3">
+                        <div class="form-check form-switch mt-1">
+                            <input class="form-check-input" type="checkbox" id="autoRefreshToggle">
+                        </div>
+                        <small class="ms-2 text-muted">Auto-refresh</small>
+                    </li>
+
+                    <!-- theme toggle -->
+                    <li class="nav-item me-3">
+                        <button class="btn btn-ghost" id="themeToggle" title="Toggle theme"><i id="themeIcon"
+                                class="fa-solid fa-moon"></i></button>
+                    </li>
+
+                    <li class="nav-item ms-2">
+                        <a href="login.html" class="btn btn-outline-light btn-sm px-3">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN -->
+    <main class="container mt-5 pt-5">
+        <h2 class="section-title text-center mt-4 mb-4">
+            <i class="fa-solid fa-comments me-2 text-gold"></i>Manage User Queries
+        </h2>
+
+        <!-- Analytics & Controls -->
+        <div class="row g-3 mb-4">
+            <div class="col-lg-8">
+                <div class="glass-card p-3 d-flex align-items-center justify-content-between">
+                    <div class="d-flex gap-3 align-items-center">
+                        <input id="searchQuery" class="form-control" placeholder="Search by user, subject or message" />
+                        <select id="filterStatus" class="form-select" style="max-width:170px;">
+                            <option value="">All Status</option>
+                            <option>Pending</option>
+                            <option>Resolved</option>
+                        </select>
+                        <button id="refreshQueries" class="btn btn-gold"><i
+                                class="fa-solid fa-rotate me-2"></i>Refresh</button>
+                    </div>
+
+                    <div class="text-end">
+                        <button id="exportCsv" class="btn btn-outline-light btn-sm me-2"><i
+                                class="fa-solid fa-file-csv me-1"></i>CSV</button>
+                        <button id="exportXls" class="btn btn-outline-light btn-sm me-2"><i
+                                class="fa-solid fa-file-excel me-1"></i>Excel</button>
+                        <button id="exportPdf" class="btn btn-outline-light btn-sm"><i
+                                class="fa-solid fa-file-pdf me-1"></i>PDF</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- mini stats -->
+            <div class="col-lg-4">
+                <div class="glass-card p-3">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <h6 class="mb-0 text-muted">Total Queries</h6>
+                            <h4 id="statTotal">—</h4>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 text-muted">Pending</h6>
+                            <h4 id="statPending" class="text-gold">—</h4>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 text-muted">Resolved</h6>
+                            <h4 id="statResolved">—</h4>
+                        </div>
+                    </div>
+                    <canvas id="queriesChart" height="80"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- table -->
+        <div class="glass-card p-3 mb-4">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle" id="queryTable">
+                    <thead>
+                        <tr>
+                            <th data-sort="query_id">Query ID <i class="fa fa-sort"></i></th>
+                            <th data-sort="user_name">User</th>
+                            <th data-sort="subject">Subject</th>
+                            <th data-sort="message">Message</th>
+                            <th data-sort="status">Status</th>
+                            <th data-sort="created_at">Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="queryBody">
+                        <!-- rows injected via JS -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- pagination -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <div id="pageInfo" class="text-muted"></div>
+                <div>
+                    <button id="prevPage" class="btn btn-outline-light btn-sm me-2">Prev</button>
+                    <button id="nextPage" class="btn btn-outline-light btn-sm">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- REPLY / DETAILS MODAL -->
+    <div class="modal fade" id="replyModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content glass-card">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title text-gold"><i class="fa-solid fa-message me-2"></i>Query Details</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="modalQueryBox" class="mb-3">
+                        <!-- Query metadata inserted here -->
+                        <div class="small text-muted" id="modalMeta">Loading…</div>
+                        <div class="glass-card p-3 mt-2" id="modalMessageBox" style="white-space:pre-wrap;"></div>
+                    </div>
+
+                    <hr />
+
+                    <div id="replyHistory" class="mb-3">
+                        <h6 class="small text-muted">Reply History</h6>
+                        <div id="historyList" class="small text-light"></div>
+                    </div>
+
+                    <div>
+                        <label class="small text-muted">Write Reply</label>
+                        <textarea id="replyMessage" class="form-control" rows="4"
+                            placeholder="Type your reply..."></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer border-0">
+                    <button class="btn btn-outline-light" data-bs-dismiss="modal">Cancel</button>
+                    <button id="resolveBtn" class="btn btn-outline-light">Resolve</button>
+                    <button id="deleteBtn" class="btn btn-outline-light d-none">Delete</button>
+                    <button id="sendReplyBtn" class="btn btn-gold">Send Reply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="text-center py-3 mt-4">
+        <p>&copy; 2025 Marriott Hotel | Query Management</p>
+    </footer>
+
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Page JS -->
+    <script src="queries.js"></script>
+</body>
+
+</html>

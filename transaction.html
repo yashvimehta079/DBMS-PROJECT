@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marriott — Transactions</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="transaction.css">
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container">
+            <a class="navbar-brand" href="#">Marriott</a>
+            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navCollapse">
+                <i class="fa fa-bars" style="color:#fff"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navCollapse">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="admin_dashboard.html" target="_blank">Admin</a></li>
+                    <li class="nav-item"><a class="nav-link" href="staff_dashboard.html" target="_blank">Staff</a></li>
+                    <li class="nav-item"><a class="nav-link" href="guest_dashboard.html" target="_blank">Guest</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#">Transactions</a></li>
+                </ul>
+                <a href="logout.html" class="btn btn-outline-light ms-3">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- MAIN CONTENT -->
+    <main class="container mt-5 pt-5">
+        <h2 class="section-title text-center mt-4 mb-5">
+            <i class="fa-solid fa-money-check-dollar me-2 text-gold"></i>Transaction Management
+        </h2>
+
+        <!-- SEARCH & FILTER -->
+        <div class="glass-card p-4 mb-4">
+            <div class="row g-3 align-items-center">
+                <div class="col-md-4">
+                    <input type="text" id="searchBox" class="form-control"
+                        placeholder="Search by booking ID or guest name">
+                </div>
+                <div class="col-md-3">
+                    <select id="filterStatus" class="form-select">
+                        <option value="">Filter by Status</option>
+                        <option value="Success">Success</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Failed">Failed</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <select id="filterMode" class="form-select">
+                        <option value="">Filter by Payment Mode</option>
+                        <option value="Credit Card">Credit Card</option>
+                        <option value="Debit Card">Debit Card</option>
+                        <option value="UPI">UPI</option>
+                        <option value="Cash">Cash</option>
+                    </select>
+                </div>
+                <div class="col-md-2 text-end">
+                    <button class="btn btn-gold" id="exportCsv"><i class="fa-solid fa-file-export me-2"></i>Export
+                        CSV</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- TRANSACTION TABLE -->
+        <div class="glass-card p-4 mb-5">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle" id="transactionTable">
+                    <thead>
+                        <tr>
+                            <th data-sort="payment_id">Payment ID <i class="fa fa-sort"></i></th>
+                            <th data-sort="booking_id">Booking ID <i class="fa fa-sort"></i></th>
+                            <th data-sort="guest_name">Guest Name <i class="fa fa-sort"></i></th>
+                            <th data-sort="amount">Amount <i class="fa fa-sort"></i></th>
+                            <th data-sort="mode">Mode <i class="fa fa-sort"></i></th>
+                            <th data-sort="date">Date <i class="fa fa-sort"></i></th>
+                            <th data-sort="status">Status <i class="fa fa-sort"></i></th>
+                        </tr>
+                    </thead>
+                    <tbody id="transactionBody">
+                        <!-- Data fetched dynamically -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- PAGINATION -->
+            <div class="d-flex justify-content-between align-items-center mt-3">
+                <span id="pageInfo" class="text-muted"></span>
+                <div>
+                    <button class="btn btn-outline-light btn-sm" id="prevPage">Prev</button>
+                    <button class="btn btn-outline-light btn-sm" id="nextPage">Next</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="text-center py-3 mt-5">
+        <p>&copy; 2025 Marriott Hotel | Admin Portal</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="transaction.js"></script>
+</body>
+
+</html>

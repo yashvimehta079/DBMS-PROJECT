@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --gold: #d4af37;
+    --gold-light: #f5e6a1;
+    --dark-bg: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+    --glass: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.12);
+    --text: #fdfdfd;
+    --muted: #d6d6d6;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--dark-bg);
+    color: var(--text);
+    padding-top: 90px;
+    min-height: 100vh;
+}
+
+/* navbar */
+.glass-nav {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.22);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+/* glass cards */
+.glass-card {
+    background: var(--glass);
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.12);
+    padding: 12px;
+}
+
+/* controls */
+.section-title {
+    color: var(--gold-light);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.btn-gold {
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    color: #000;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-outline-light {
+    border-color: var(--gold-light);
+    color: var(--gold-light);
+}
+
+/* table */
+.table {
+    color: var(--text);
+    margin-bottom: 0;
+}
+
+.table thead th {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--gold-light);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* badge */
+.badge {
+    font-weight: 600;
+}
+
+/* modal */
+.modal-content {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 10px;
+}
+
+.form-label {
+    color: var(--muted);
+}
+
+/* small text */
+.small,
+.text-muted {
+    color: var(--muted) !important;
+}
+
+/* audit list */
+#auditList {
+    color: var(--muted);
+}
+
+/* responsive tweaks */
+@media (max-width: 768px) {
+    .glass-card {
+        padding: 10px;
+    }
+
+    #accessTable thead th:nth-child(6),
+    #accessTable tbody td:nth-child(6) {
+        display: none;
+    }
+
+    /* hide privileges column on small screens */
+}

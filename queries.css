@@ -1,0 +1,216 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+:root {
+    --gold: #d4af37;
+    --gold-light: #f5e6a1;
+    --dark-bg: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+    --glass: rgba(255, 255, 255, 0.08);
+    --border: rgba(255, 255, 255, 0.12);
+    --text-light: #fdfdfd;
+    --text-muted: #d6d6d6;
+    /* made brighter */
+}
+
+/* base */
+* {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: var(--dark-bg);
+    color: var(--text-light);
+    padding-top: 90px;
+    min-height: 100vh;
+}
+
+/* NAVBAR */
+.glass-nav {
+    background: rgba(30, 30, 30, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.nav-link {
+    color: var(--text-light) !important;
+}
+
+.nav-link:hover {
+    color: var(--gold-light) !important;
+    text-shadow: 0 0 6px var(--gold);
+}
+
+/* BUTTONS */
+.btn-gold {
+    background: linear-gradient(45deg, var(--gold), var(--gold-light));
+    color: #000;
+    border: none;
+    font-weight: 600;
+}
+
+.btn-outline-light {
+    border-color: var(--gold-light);
+    color: var(--gold-light);
+}
+
+.btn-outline-light:hover {
+    background: var(--gold-light);
+    color: #000;
+}
+
+.btn-ghost {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+}
+
+/* NOTIFICATIONS */
+.notif-badge {
+    position: absolute;
+    top: -4px;
+    right: -6px;
+    font-size: 10px;
+    padding: 3px 5px;
+    background: var(--gold-light);
+    color: #000;
+    border-radius: 999px;
+    font-weight: bold;
+}
+
+.notif-dropdown {
+    min-width: 320px;
+    background: rgba(40, 40, 40, 0.95);
+    color: var(--text-light);
+}
+
+/* CARD STYLING */
+.glass-card {
+    background: var(--glass);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.12);
+}
+
+/* SECTION TITLES */
+.section-title {
+    color: var(--gold-light);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+/* TABLE */
+.table {
+    color: var(--text-light);
+}
+
+.table thead th {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--gold-light);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.table tbody tr:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* BADGES & TEXT */
+.badge {
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.text-gold {
+    color: var(--gold-light);
+}
+
+.text-muted {
+    color: var(--text-muted) !important;
+}
+
+small,
+label,
+#pageInfo,
+#statTotal,
+#statPending,
+#statResolved {
+    color: var(--text-light) !important;
+}
+
+/* PAGINATION */
+#pageInfo {
+    font-size: 0.9rem;
+    color: var(--gold-light) !important;
+    font-weight: 500;
+}
+
+/* STATS NUMBERS */
+#statTotal,
+#statPending,
+#statResolved {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+/* SWITCH LABEL */
+.form-check-input:checked {
+    background-color: var(--gold-light);
+    border-color: var(--gold-light);
+}
+
+.form-check-label,
+small {
+    color: var(--text-light) !important;
+}
+
+/* MODAL */
+.modal-content {
+    background: rgba(20, 20, 20, 0.95);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-light);
+}
+
+#modalMessageBox {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 12px;
+    border-radius: 8px;
+    color: var(--text-light);
+}
+
+/* HISTORY */
+#historyList {
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 8px;
+    padding: 6px;
+    max-height: 180px;
+    overflow-y: auto;
+    color: var(--text-light);
+}
+
+/* FOOTER */
+footer {
+    color: var(--text-muted);
+    border-top: 1px solid var(--border);
+    padding: 1rem 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .notif-dropdown {
+        min-width: 220px;
+    }
+}
